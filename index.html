@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Für dich — Jeden Tag ein Satz</title>
+
+  <!-- Geschwungene Schrift: Dancing Script (lädt automatisch von Google Fonts) -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Haupt-CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Hinweis: script.js wird separat geliefert und enthält die 365 Zitate + Logik -->
+</head>
+<body>
+  <!-- Haupt-Container -->
+  <main id="app">
+    <!-- Optionales kleines Label (wird vom JS bei Bedarf gesetzt) -->
+    <div id="intro" class="overlay hidden">
+      <div class="overlay-content">
+        <h2>Mein kleiner Engel</h2>
+        <p>Auch wenn ich dir nicht täglich Zettel schicken konnte, mache ich es auf diese Art. Rufe diese Seite jeden Tag auf und lies dir dieses Zitat durch.</p>
+        <button id="intro-ok" class="btn">Okay</button>
+      </div>
+    </div>
+
+    <!-- Zitat-Box -->
+    <section class="quote-wrap" aria-live="polite">
+      <blockquote id="quote">…</blockquote>
+      <div class="quote-meta">
+        <span id="quote-index"></span>
+        <span id="quote-date"></span>
+      </div>
+      <button id="ack-btn" class="btn">Okay</button>
+    </section>
+  </main>
+
+  <!-- Skript mit der täglichen Logik (kommt separat) -->
+  <script src="script.js" defer></script>
+</body>
+</html>
