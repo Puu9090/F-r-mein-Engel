@@ -125,7 +125,7 @@ const quotes = [
 `Ich erinnere mich an die Fahrt nach Hamburg wie an ein Gedicht.`,
 `Unsere Liebe ist ein gemachtes Lager aus Mut und Zärtlichkeit.`,
 `069 — drei Zahlen, ein Magnet.`,
-`Du machst aus alltäglichem Essen ein Fest.`,
+`Deine Nachrichten waren immer kleine Rettungsringe...`,
 `Ich erinnere mich an den Geruch der Berliner Straßen nach unserem Kuss.`,
 `Wir sind gute Pläne im Chaos des Alltags.`,
 `Deine Ehrlichkeit hat mein Herz repariert.`,
