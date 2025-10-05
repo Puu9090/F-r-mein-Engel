@@ -1,11 +1,14 @@
-// script.js
-// Tägliches Zitat-Projekt
-// Startdatum (erster gemeinsamer Tag) — 15.09.2024
-const START_DATE_ISO = "2024-09-15"; // YYYY-MM-DD
+// script.js – persönliche Zitate-Seite
+document.addEventListener("DOMContentLoaded", () => {
+  const quoteBox = document.querySelector(".quote-wrap");
+  const quoteEl = document.getElementById("quote");
+  const quoteDate = document.getElementById("quote-date");
+  const intro = document.getElementById("intro");
+  const introBtn = document.getElementById("intro-ok");
+  const ackBtn = document.getElementById("ack-btn");
 
-// --- 365 persönliche, kurze Zitate (ein Satz pro Eintrag) ---
-// Format: Backticks verwendet, damit einfache Apostrophe keine Probleme machen.
-const quotes = [
+  // ✨ Deine Zitate – hier kannst du beliebig viele hinzufügen (max. 365)
+  const quotes = [
 `Ich denke an dich.`,
 `069 — unser Zuhause, egal wo wir sind.`,
 `Berlin, der erste Kuss, und alles begann.`,
@@ -270,165 +273,31 @@ const quotes = [
 `Ich liebe, wie du mich durch schlechte Tage bringst.`,
 `Unsere Küsse haben mehr Gewicht als jede Stadt.`,
 `Ich erinnere mich an die Langsamkeit unserer besten Tage.`,
-`Du bist mein Lieblingsmensch und mein größter Halt.`
-];
+`Du bist mein Lieblingsmensch und mein größter Halt.`  ];
 
-// -------------------------------------------------------------
-// Utility: convert YYYY-MM-DD to Date at local timezone midnight
-function dateFromISO(iso) {
-  const [y, m, d] = iso.split("-").map(Number);
-  // Note: months in JS Date are 0-indexed
-  return new Date(y, m - 1, d);
-}
+  // 📅 Tageszitat berechnen
+  const startDate = new Date("2024-09-15"); // erster gemeinsamer Tag
+  const today = new Date();
+  const diff = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+  const index = diff % quotes.length;
+  const todayQuote = quotes[index] || "Ich denke an dich.";
 
-// Compute today's date (local time)
-const today = new Date();
-const startDate = dateFromISO(START_DATE_ISO);
+  // 📆 Datum formatieren (DD.MM.YYYY)
+  const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+  const formattedDate = today.toLocaleDateString("de-DE", options);
+  quoteDate.textContent = formattedDate;
+  quoteEl.textContent = todayQuote;
 
-// Calculate day difference in local days
-// Normalize both to midnight local time to avoid DST issues
-function midnight(date) {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-}
-
-const daysSinceStart = Math.floor((midnight(today) - midnight(startDate)) / (1000 * 60 * 60 * 24));
-
-// index in quotes array: map negative days or large future/past into cycle using modulo
-// ensure positive modulo
-function mod(n, m) { return ((n % m) + m) % m; }
-
-const quoteIndex = mod(daysSinceStart, quotes.length); // 0..364
-const quoteText = quotes[quoteIndex];
-
-// The "date for quote" — startDate + daysSinceStart (so each quote corresponds to a real calendar day)
-const currentQuoteDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + daysSinceStart);
-
-// Format date for display: e.g. 15.09.2024
-function formatDateGerman(d) {
-  const dd = String(d.getDate()).padStart(2, "0");
-  const mm = String(d.getMonth() + 1).padStart(2, "0");
-  const yyyy = d.getFullYear();
-  return `${dd}.${mm}.${yyyy}`;
-}
-
-// DOM elements
-const quoteEl = document.getElementById("quote");
-const idxEl = document.getElementById("quote-index");
-const dateEl = document.getElementById("quote-date");
-const ackBtn = document.getElementById("ack-btn");
-const introOverlay = document.getElementById("intro");
-const introOkBtn = document.getElementById("intro-ok");
-
-// Accessibility: ensure focusable
-if (ackBtn) ackBtn.setAttribute("aria-label", "Zitat bestätigen");
-
-// Render quote and meta
-if (quoteEl) quoteEl.textContent = quoteText;
-if (idxEl) idxEl.textContent = `Tag ${quoteIndex + 1} / ${quotes.length}`;
-if (dateEl) dateEl.textContent = formatDateGerman(currentQuoteDate);
-
-// ARIA live: announce
-if (quoteEl) quoteEl.setAttribute("aria-live", "polite");
-
-// ---- Intro overlay logic ----
-// Show the intro overlay only on the first day (15.09.2024)
-// and only if not already acknowledged in localStorage for that day.
-(function handleIntroOverlay() {
-  if (!introOverlay) return;
-
-  const startISO = START_DATE_ISO; // "2024-09-15"
-  const todayISO = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`;
-
-  // Only show overlay when today's ISO == start ISO
-  if (todayISO === startISO) {
-    // If user already confirmed intro before, don't force it again
-    const key = `introConfirmed_${startISO}`;
-    const confirmed = localStorage.getItem(key);
-    if (!confirmed) {
-      introOverlay.classList.remove("hidden");
-      // focus the button for accessibility
-      setTimeout(() => { if (introOkBtn) introOkBtn.focus(); }, 50);
-      // click handler saves confirmed flag
-      if (introOkBtn) {
-        introOkBtn.addEventListener("click", () => {
-          localStorage.setItem(key, "1");
-          introOverlay.classList.add("hidden");
-        });
-      }
-    }
-  } else {
-    // Not the first day — ensure overlay hidden
-    introOverlay.classList.add("hidden");
-  }
-})();
-
-// ---- OK button behavior ----
-if (ackBtn) {
-  ackBtn.addEventListener("click", () => {
-    // store that today's quote was acknowledged
-    const ackKey = `quoteAcknowledged_${formatDateGerman(currentQuoteDate)}`;
-    localStorage.setItem(ackKey, "1");
-
-    // simple animation: fade out the main content and show a small message
-    fadeOutAndThank();
+  // 💜 Intro-Overlay zuerst anzeigen
+  introBtn.addEventListener("click", () => {
+    intro.classList.add("hidden");
+    quoteBox.classList.remove("hidden");
   });
-}
 
-// Fade out and show message; attempt to close window (will only work if opened by script)
-function fadeOutAndThank() {
-  const mainSection = document.querySelector(".quote-wrap");
-  if (!mainSection) return;
-
-  mainSection.style.transition = "opacity 450ms ease, transform 450ms ease";
-  mainSection.style.opacity = "0";
-  mainSection.style.transform = "translateY(10px)";
-
-  setTimeout(() => {
-    // replace with small thanks message
-    const parent = mainSection.parentElement;
-    const msg = document.createElement("div");
-    msg.style.textAlign = "center";
-    msg.style.color = "var(--muted)";
-    msg.style.fontFamily = "Dancing Script, system-ui, -apple-system, 'Segoe UI', Roboto";
-    msg.style.fontSize = "1.2rem";
-    msg.style.padding = "2rem";
-    msg.innerHTML = `Danke — bis morgen ❤️`;
-
-    // try to close the window (may be blocked)
-    try { window.close(); } catch(e) { /* ignore */ }
-
-    // clear old and insert
-    if (parent) {
-      parent.innerHTML = "";
-      parent.appendChild(msg);
-    }
-  }, 480);
-}
-
-// ---- small helper: if quote has been acknowledged already for this date, optionally show subtle state ----
-(function reflectAcknowledgementState() {
-  const ackKey = `quoteAcknowledged_${formatDateGerman(currentQuoteDate)}`;
-  const acknowledged = localStorage.getItem(ackKey);
-  if (acknowledged) {
-    // If already acknowledged, dim the OK button slightly and update text
-    if (ackBtn) {
-      ackBtn.textContent = "Bereits bestätigt ✓";
-      ackBtn.disabled = true;
-      ackBtn.style.opacity = "0.8";
-      ackBtn.style.cursor = "default";
-    }
-  }
-})();
-
-// ---- small accessibility: allow Enter key to confirm when focused on quote ----
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" || e.key === " ") {
-    const active = document.activeElement;
-    // if focus is on the body or quote, interpret Enter as ack
-    if (active === document.body || active === quoteEl) {
-      if (ackBtn && !ackBtn.disabled) {
-        ackBtn.click();
-      }
-    }
-  }
+  // 💬 „Okay“-Button unter Zitat
+  ackBtn.addEventListener("click", () => {
+    // Fenster schließen funktioniert nur bei Tabs, die per Script geöffnet wurden;
+    // sonst bleibt die Seite einfach stehen, das ist okay.
+    window.close();
+  });
 });
