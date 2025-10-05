@@ -1,125 +1,177 @@
-/* style.css - schlicht, schwarz + sehr dunkles Lila, geschwungene Schrift */
+/* ========== Grundlayout ========== */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&display=swap');
 
-/* Farben */
-:root{
-  --black: #000000;
-  --deep-purple: #120018;   /* sehr dunkles Lila */
-  --accent-purple: #2b0036; /* leichtes Akzent-Lila */
-  --text: #EDE6FF;          /* helles Violett-weiß für Lesbarkeit */
-  --muted: #bfa8e6;
-}
-
-/* Basis */
-* { box-sizing: border-box; }
-html,body {
-  height: 100%;
+html, body {
   margin: 0;
-  background: linear-gradient(180deg, var(--black) 0%, var(--deep-purple) 100%);
-  font-family: "Dancing Script", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  color: var(--text);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  height: 100%;
+  background-color: #000;
+  color: #c5a3ff;
+  font-family: 'Dancing Script', cursive;
+  overflow: hidden;
 }
 
 /* Zentrierter Inhalt */
-#app {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 2rem;
-}
-
-/* Zitat-Box */
-.quote-wrap {
-  max-width: 980px;
-  width: 100%;
-  text-align: center;
-  padding: 3.2rem 2rem;
-  border-radius: 14px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
-  box-shadow: 0 10px 30px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
-  backdrop-filter: blur(3px);
-}
-
-/* Das Zitat selbst — groß und geschwungen */
-blockquote#quote {
-  margin: 0;
-  font-size: clamp(1.4rem, 3.5vw, 3.6rem);
-  line-height: 1.08;
-  font-weight: 400;
-  letter-spacing: 0.2px;
-  color: var(--text);
-  text-shadow: 0 6px 18px rgba(0,0,0,0.7);
-}
-
-/* Meta (Datum / Index) */
-.quote-meta {
-  margin-top: 1.2rem;
+main#app {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  color: var(--muted);
-  font-size: 0.9rem;
-  opacity: 0.95;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  z-index: 2;
 }
 
-/* Button */
-.btn {
-  margin-top: 2.2rem;
-  display: inline-block;
-  background: linear-gradient(180deg, var(--accent-purple), rgba(255,255,255,0.03));
-  border: 1px solid rgba(255,255,255,0.04);
-  color: var(--text);
-  padding: 0.7rem 1.4rem;
-  font-size: 1.05rem;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
-  text-decoration: none;
-  box-shadow: 0 6px 20px rgba(43,0,54,0.32);
-}
-
-.btn:hover { transform: translateY(-3px); }
-
-/* Overlay für die intro Nachricht (erscheint nur an eurem Kennenlern-Tag) */
+/* ========== Intro Overlay ========== */
 .overlay {
   position: fixed;
   inset: 0;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(180deg, rgba(0,0,0,0.6), rgba(18,0,24,0.8));
-  z-index: 30;
-  padding: 2rem;
-}
-
-.overlay-content {
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border-radius: 12px;
-  padding: 2rem;
-  max-width: 760px;
+  background-color: rgba(0, 0, 0, 0.95);
+  color: #c5a3ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  z-index: 5;
+  padding: 2rem;
+  font-size: 1.5rem;
 }
 
-.overlay-content h2 {
-  margin: 0 0 1rem 0;
-  font-size: 2.2rem;
-  color: var(--text);
+.overlay.hidden {
+  display: none;
 }
 
-.overlay-content p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 1.05rem;
+.overlay button {
+  margin-top: 2rem;
+  background-color: #3b0069;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.8rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  font-family: 'Dancing Script', cursive;
+  transition: all 0.3s ease;
+}
+
+.overlay button:hover {
+  background-color: #6a00a8;
+}
+
+/* ========== Zitat-Anzeige ========== */
+.quote-wrap {
+  text-align: center;
+  font-size: 2rem;
+  padding: 0 1rem;
+}
+
+.quote-wrap.hidden {
+  display: none;
+}
+
+#quote-date {
+  font-size: 1.1rem;
+  opacity: 0.6;
+  margin-bottom: 1.2rem;
+}
+
+#quote {
+  margin-top: 1rem;
+  font-size: 2.3rem;
   line-height: 1.5;
 }
 
-/* versteckt (wird durch JS entfernt) */
-.hidden { display: none; }
+#ack-btn {
+  margin-top: 2rem;
+  background-color: #3b0069;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.8rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  font-family: 'Dancing Script', cursive;
+  transition: all 0.3s ease;
+}
 
-/* Responsive */
-@media (max-width:640px){
-  .quote-wrap { padding: 2.4rem 1.2rem; border-radius:10px; }
-  .overlay-content { padding: 1.4rem; }
-  .overlay-content h2 { font-size: 1.6rem; }
+#ack-btn:hover {
+  background-color: #6a00a8;
+}
+
+/* ========== Herz-Hintergrund mit Überblendung ========== */
+.heart-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 420px;
+  height: 380px;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  opacity: 0.25;
+  filter: saturate(130%) brightness(1.1);
+  animation: pulse 6s ease-in-out infinite;
+}
+
+.heart-slideshow {
+  width: 100%;
+  height: 100%;
+  clip-path: path("M239.5,30.2c-24.4-24.4-63.9-24.4-88.3,0l-9.7,9.7l-9.7-9.7c-24.4-24.4-63.9-24.4-88.3,0c-24.4,24.4-24.4,63.9,0,88.3l98,98l98-98C263.9,94.1,263.9,54.6,239.5,30.2z");
+  position: relative;
+  overflow: hidden;
+}
+
+.heart-slideshow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  animation: fadeImages 84s infinite;
+  border-radius: 3px;
+}
+
+/* Animation für die 21 Bilder */
+@keyframes fadeImages {
+  0%   { background-image: url('bild1.jpg'); opacity: 1; }
+  4.7% { background-image: url('bild2.jpg'); }
+  9.5% { background-image: url('bild3.jpg'); }
+  14.2% { background-image: url('bild4.jpg'); }
+  19% { background-image: url('bild5.jpg'); }
+  23.8% { background-image: url('bild6.jpg'); }
+  28.5% { background-image: url('bild7.jpg'); }
+  33.3% { background-image: url('bild8.jpg'); }
+  38% { background-image: url('bild9.jpg'); }
+  42.8% { background-image: url('bild10.jpg'); }
+  47.6% { background-image: url('bild11.jpg'); }
+  52.3% { background-image: url('bild12.jpg'); }
+  57.1% { background-image: url('bild13.jpg'); }
+  61.9% { background-image: url('bild14.jpg'); }
+  66.6% { background-image: url('bild15.jpg'); }
+  71.4% { background-image: url('bild16.jpg'); }
+  76.1% { background-image: url('bild17.jpg'); }
+  80.9% { background-image: url('bild18.jpg'); }
+  85.7% { background-image: url('bild19.jpg'); }
+  90.4% { background-image: url('bild20.jpg'); }
+  95.2% { background-image: url('bild21.jpg'); }
+  100% { background-image: url('bild1.jpg'); }
+}
+
+/* Herz pulsiert sanft */
+@keyframes pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.05); }
+}
+
+/* ========== Responsives Verhalten ========== */
+@media (max-width: 600px) {
+  .quote-wrap {
+    font-size: 1.6rem;
+  }
+  #quote {
+    font-size: 1.8rem;
+  }
+  .heart-container {
+    width: 300px;
+    height: 270px;
+  }
 }
