@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const introBtn = document.getElementById("intro-ok");
   const ackBtn = document.getElementById("ack-btn");
 
-  // ✨ Deine Zitate – hier kannst du beliebig viele hinzufügen (max. 365)
+  // ✨ Deine Zitate
   const quotes = [
 `Ich denke an dich.`,
 `069 — unser Zuhause, egal wo wir sind.`,
@@ -276,28 +276,26 @@ document.addEventListener("DOMContentLoaded", () => {
 `Du bist mein Lieblingsmensch und mein größter Halt.`  ];
 
   // 📅 Tageszitat berechnen
-  const startDate = new Date("2024-09-15"); // erster gemeinsamer Tag
+  const startDate = new Date("2024-09-15");
   const today = new Date();
   const diff = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
   const index = diff % quotes.length;
   const todayQuote = quotes[index] || "Ich denke an dich.";
 
-  // 📆 Datum formatieren (DD.MM.YYYY)
+  // 📆 Datum formatieren
   const options = { year: "numeric", month: "2-digit", day: "2-digit" };
   const formattedDate = today.toLocaleDateString("de-DE", options);
   quoteDate.textContent = formattedDate;
   quoteEl.textContent = todayQuote;
 
-  // 💜 Intro-Overlay zuerst anzeigen
+  // 💜 Intro anzeigen
   introBtn.addEventListener("click", () => {
     intro.classList.add("hidden");
     quoteBox.classList.remove("hidden");
   });
 
-  // 💬 „Okay“-Button unter Zitat
+  // 💬 „Okay“-Button
   ackBtn.addEventListener("click", () => {
-    // Fenster schließen funktioniert nur bei Tabs, die per Script geöffnet wurden;
-    // sonst bleibt die Seite einfach stehen, das ist okay.
     window.close();
   });
 });
