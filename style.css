@@ -11,7 +11,7 @@ html, body {
   overflow: hidden;
 }
 
-/* Inhalt zentrieren */
+/* Zentrierter Inhalt */
 main#app {
   display: flex;
   justify-content: center;
