@@ -1,46 +1,35 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Für dich — Jeden Tag ein Satz</title>
-
-  <!-- Geschwungene Schrift: Dancing Script (lädt automatisch von Google Fonts) -->
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
-
-  <!-- Haupt-CSS -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Für mein Engel 💜</title>
   <link rel="stylesheet" href="style.css">
-
-  <!-- Hinweis: script.js wird separat geliefert und enthält die 365 Zitate + Logik -->
 </head>
 <body>
-  <!-- Haupt-Container -->
+  <!-- Vollbild Slideshow & Herz -->
+  <div class="slideshow-bg"></div>
+  <div class="heart-overlay"></div>
+
+  <!-- Hauptbereich -->
   <main id="app">
-  <div class="heart-container">
-  <div class="heart-slideshow">
-    <!-- Bilder werden über CSS eingebunden -->
-  </div>
-</div>
-    <!-- Neues Intro-Overlay -->
-    <div id="intro" class="overlay">
-      <div class="overlay-content">
-        <h2>Hey Babe...</h2>
-        <p>Danke, dass du dir die Zeit nimmst. Dieses Zitat soll dich an unsere gemeinsame Zeit erinnern.</p>
-        <button id="intro-ok" class="btn">Okay</button>
-      </div>
+    <!-- Intro Overlay -->
+    <div class="overlay" id="intro">
+      <p>
+        Hey Babe… danke, dass du dir die Zeit nimmst.<br><br>
+        Dieses Zitat soll dich jeden Tag an unsere gemeinsame Zeit erinnern. 💜
+      </p>
+      <button id="intro-ok">Okay</button>
     </div>
 
-    <!-- Zitat-Box -->
-    <section class="quote-wrap hidden" aria-live="polite">
-      <blockquote id="quote">…</blockquote>
-      <div class="quote-meta">
-        <span id="quote-date"></span>
-      </div>
-      <button id="ack-btn" class="btn">Okay</button>
-    </section>
+    <!-- Zitat-Anzeige -->
+    <div class="quote-wrap hidden">
+      <div id="quote-date"></div>
+      <div id="quote"></div>
+      <button id="ack-btn">Okay</button>
+    </div>
   </main>
 
-  <!-- Skript -->
-  <script src="script.js" defer></script>
+  <script src="script.js"></script>
 </body>
 </html>
