@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
 `Deine Nachrichten waren immer kleine Rettungsringe...`,
 `Ich erinnere mich an den Geruch der Berliner Straßen nach unserem Kuss.`,
 `Wir sind gute Pläne im Chaos des Alltags.`,
-`Deine Ehrlichkeit hat mein Herz repariert.`,
+`069 — drei Zahlen, unendlich Bedeutung.`,
 `Unser Lachen klingt wie zu Hause.`,
 `069 — drei Zahlen, ein Magnet.`,
 `Wir haben uns in Frankfurter Nächten verloren und wiedergefunden.`,
