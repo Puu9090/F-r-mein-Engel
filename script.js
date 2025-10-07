@@ -1,4 +1,4 @@
-// script.js – persönliche Zitate-Seite
+// script.js – persönliche Zitate-Seite mit Tages-Überraschung
 document.addEventListener("DOMContentLoaded", () => {
   const quoteBox = document.querySelector(".quote-wrap");
   const quoteEl = document.getElementById("quote");
@@ -273,7 +273,8 @@ document.addEventListener("DOMContentLoaded", () => {
 `Ich liebe, wie du mich durch schlechte Tage bringst.`,
 `Unsere Küsse haben mehr Gewicht als jede Stadt.`,
 `Ich erinnere mich an die Langsamkeit unserer besten Tage.`,
-`Du bist mein Lieblingsmensch und mein größter Halt.`  ];
+`Du bist mein Lieblingsmensch und mein größter Halt.`
+  ];
 
   // 📅 Tageszitat berechnen
   const startDate = new Date("2024-09-15");
@@ -282,13 +283,66 @@ document.addEventListener("DOMContentLoaded", () => {
   const index = diff % quotes.length;
   const todayQuote = quotes[index] || "Ich denke an dich.";
 
-  // 📆 Datum formatieren
   const options = { year: "numeric", month: "2-digit", day: "2-digit" };
   const formattedDate = today.toLocaleDateString("de-DE", options);
   quoteDate.textContent = formattedDate;
   quoteEl.textContent = todayQuote;
 
-  // 💜 Intro anzeigen
+  // ❤️ Überaschung nur am 4. Oktober 2025
+  const specialDate = "2025-10-04";
+  const todayISO = today.toISOString().split("T")[0];
+
+  if (todayISO === specialDate) {
+    // Mini-Overlay für Überraschung
+    const surpriseOverlay = document.createElement("div");
+    surpriseOverlay.style.cssText = `
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0,0,0,0.92);
+      color: #c5a3ff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 999;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      transition: opacity 1s ease;
+    `;
+    surpriseOverlay.innerHTML = `
+      <p>Babe?... willst du lachen? 😏</p>
+      <div style="margin-top: 2rem;">
+        <button id="yesBtn" style="margin:0 1rem; background:#3b0069; color:#fff; border:none; border-radius:8px; padding:0.8rem 1.8rem; font-size:1.2rem; cursor:pointer;">Ja 😄</button>
+        <button id="noBtn" style="margin:0 1rem; background:#3b0069; color:#fff; border:none; border-radius:8px; padding:0.8rem 1.8rem; font-size:1.2rem; cursor:pointer;">Nein 🙈</button>
+      </div>
+    `;
+    document.body.appendChild(surpriseOverlay);
+
+    const yesBtn = surpriseOverlay.querySelector("#yesBtn");
+    const noBtn = surpriseOverlay.querySelector("#noBtn");
+
+    const showImage = (img) => {
+      surpriseOverlay.innerHTML = `
+        <img src="${img}" style="max-width:80%; max-height:80%; border-radius:12px; box-shadow:0 0 20px rgba(0,0,0,0.8);" />
+      `;
+      setTimeout(() => {
+        surpriseOverlay.style.opacity = "0";
+        setTimeout(() => {
+          surpriseOverlay.remove();
+          intro.classList.remove("hidden");
+        }, 1000);
+      }, 4000);
+    };
+
+    yesBtn.addEventListener("click", () => showImage("bild22.jpg"));
+    noBtn.addEventListener("click", () => showImage("bild23.jpg"));
+  } else {
+    // Normales Verhalten an allen anderen Tagen
+    intro.classList.remove("hidden");
+  }
+
+  // 💜 Intro-Button
   introBtn.addEventListener("click", () => {
     intro.classList.add("hidden");
     quoteBox.classList.remove("hidden");
