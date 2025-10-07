@@ -288,8 +288,8 @@ document.addEventListener("DOMContentLoaded", () => {
   quoteDate.textContent = formattedDate;
   quoteEl.textContent = todayQuote;
 
-  // ❤️ Überaschung nur am 4. Oktober 2025
-  const specialDate = "2025-10-04";
+  // ❤️ Überaschung nur am 7. Oktober 2025
+  const specialDate = "2025-10-07";
   const todayISO = today.toISOString().split("T")[0];
 
   if (todayISO === specialDate) {
