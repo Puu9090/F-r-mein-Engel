@@ -139,7 +139,7 @@ Ich leide weil ich an einem Punkt stehe wo es keinen Ausweg mehr gibt…deine An
 Ich bete jeden Tag dass der Schmerz schnell vorübergeht und dass du nicht so sehr leiden musst…
 Es tut mir leid, dass ich in dein Leben getreten bin und dich so kaputt gemacht habe…denn wenn es dir nur ansatzweise so geht wie mir, dann bist du kaputt…`,
 `Wir haben uns gegenseitig verziehen — immer wieder.`,
-`Wir haben uns in Frankfurter Nächten verloren und wiedergefunden.`,
+`Zwischen Döner und Liebe — wir zwei...`,
 `Dein Blick erklärt mir Dinge, bevor du sie sagst.`,
 `An dich zu denken, reicht, um ruhig zu werden.`,
 `Wir feiern kleine Siege mit großen Portionen Essen.`,
