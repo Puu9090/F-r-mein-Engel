@@ -148,7 +148,7 @@ Es tut mir leid, dass ich in dein Leben getreten bin und dich so kaputt gemacht 
 `Ich denke an dich, auch wenn das Handy stumm ist.`,
 `Gemeinsame Kleinigkeiten waren unsere Monumente.`,
 `Du warst mein spontan geplanter Urlaub.`,
-`Ich mochte unsere ernsthaften Gespräche um Mitternacht.`,
+`Ich liebte unsere ernsthaften Gespräche um Mitternacht.`,
 `Unsere Koffer waren immer halb gepackt für das nächste Abenteuer.`,
 `069 — unsere Postleitzahl im Herzen.`,
 `Du warst mein Lieblingsgeräusch am frühen Morgen.`,
