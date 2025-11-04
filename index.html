@@ -6,44 +6,69 @@
   <title>für mein Engel</title>
   <style>
     body {
-      background-color: #000;
-      color: white;
       margin: 0;
       height: 100vh;
+      background-color: #000;
+      color: #d8b4fe;
+      font-family: 'Cormorant Garamond', serif;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-direction: row;
-      gap: 2rem;
-      font-family: 'Dancing Script', cursive;
+      text-align: center;
+      padding: 2rem;
+      line-height: 1.6;
+      letter-spacing: 0.5px;
+      font-size: 1.4rem;
       overflow: hidden;
     }
 
-    .heart {
-      font-size: 8rem;
-      animation: pulse 2.5s infinite ease-in-out;
-      user-select: none;
+    .container {
+      max-width: 800px;
+      animation: fadeIn 3s ease forwards;
     }
 
-    .heart.lila {
-      color: #a855f7;
-      animation-delay: 0.5s;
+    p {
+      margin: 1.4rem 0;
     }
 
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: scale(1.2);
-        opacity: 0.7;
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      right: 20px;
+      font-size: 0.8rem;
+      opacity: 0.4;
+    }
+
+    a {
+      text-decoration: none;
     }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="heart lila">💜</div>
-  <div class="heart weiß">🤍</div>
+  <div class="container">
+    <p>Mein letzter Liebesbeweis ist, dich einfach in Ruhe zu lassen.</p>
+    <p>Ich hoffe, du bist glücklich und zufrieden – und glaub mir, es ist das Schwerste, was ich jemals getan habe:</p>
+    <p>nicht zu schreiben, nicht mehr zu fragen und nicht mehr zu hoffen, dass du irgendwann zurückkommst.</p>
+    <p>Denn eigentlich würde ich dir noch so gerne so vieles sagen –</p>
+    <p>wie sehr du mir fehlst, wie oft ich an dich denke, wie sehr du mich geprägt hast.</p>
+    <p>Aber Liebe heißt manchmal loszulassen.</p>
+    <p>Liebe heißt, jemandem Frieden zu wünschen – auch wenn man selbst daran zerbricht.</p>
+    <p>Ich hoffe, dass dein Leben hell ist, dass du lachst – was du zuletzt bei mir viel zu selten getan hast.</p>
+    <p>Und wenn du irgendwann zurückschaust, wirst du verstehen:</p>
+    <p><strong>Mein Schweigen war nie Gleichgültigkeit…<br>Es war mein letzter Liebesbeweis.</strong></p>
+  </div>
+
+  <footer>
+    <a href="https://visitorbadge.io/status?path=puu9090%2Ffuer-mein-engel">
+      <img src="https://api.visitorbadge.io/api/visitors?path=puu9090%2Ffuer-mein-engel&labelColor=%23000000&countColor=%23d8b4fe" />
+    </a>
+  </footer>
 </body>
 </html>
